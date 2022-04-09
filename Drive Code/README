@@ -2,3 +2,37 @@ This is the Readme for the drive code.
 
 This drive code is rather universal, it takes input from a controller and outputs it as PWM signal over a raspberry's gpio
 
+############################################################################################################################################################
+The declared variables are representative of the pins on the rasperry pi in board layout, meaning 3 for example is pin 3 and not GPIO 3 or what not.
+
+The frequency is set to 150, this represents the raspberry pi 4 running at 1.5 ghz as it's clock speed. This is neccessary as pwm relies heavily on time.
+
+
+
+A little explanation of PWM:
+
+PWM or pulse width modulation allows us to controll the motor controllers. It is a essentially a single bit represented in a square wave that carries the 
+information of how much power something is going to recieve. A few things to know about PWM:
+
+Duty Cycle:  the fraction of one period when a system or signal is active. In code comments this is abbreviated as dc. This does not represent direct current in this
+case. Please avoid confusion. Duty cycle is usually expressed as a ratio or percentage. like 50/50 or 10/90. 
+
+A pwm signal looks like this:
+
+       <-----------> this span is the uptime, or how long it signal stays a 1 or high
+        ___________
+       |           |
+       |           |
+       |           |
+ ______|           |____________________________
+{         this span is the duty cycle  (~20ms)  }
+
+
+The key note about PWM signals though, is that our motorcontrollers like many other PWM devices (servos and whatnot) only respond to PWM signals between 10% and 20% 
+duty cycle. This is to prevent a failed connection to suddenly shift the position or distribution of something. If it was 0-100% dc, then how would the controllers know
+what was a lost signal or an actual input?
+
+These signals happend fast, with one duty cycle usaully taking 20ms to complete, with some quick math we can find that our uptime needed for our controllers is going 
+to be between 1-2 ms. As to my knowledge, RPi's library is going to handle this for us. 
+
+
