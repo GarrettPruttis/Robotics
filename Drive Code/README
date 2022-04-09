@@ -1,0 +1,4 @@
+This is the Readme for the drive code.
+
+This drive code is rather universal, it takes input from a controller and outputs it as PWM signal over a raspberry's gpio
+
