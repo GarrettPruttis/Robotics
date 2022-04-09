@@ -29,10 +29,33 @@ A pwm signal looks like this:
 
 
 The key note about PWM signals though, is that our motorcontrollers like many other PWM devices (servos and whatnot) only respond to PWM signals between 10% and 20% 
-duty cycle. This is to prevent a failed connection to suddenly shift the position or distribution of something. If it was 0-100% dc, then how would the controllers know
+duty cycle*. This is to prevent a failed connection to suddenly shift the position or distribution of something. If it was 0-100% dc, then how would the controllers know
 what was a lost signal or an actual input?
 
-These signals happend fast, with one duty cycle usaully taking 20ms to complete, with some quick math we can find that our uptime needed for our controllers is going 
-to be between 1-2 ms. As to my knowledge, RPi's library is going to handle this for us. 
+These signals happen fast, with one duty cycle usaully taking 20ms to complete, with some quick math we can find that our uptime needed for our controllers is going 
+to be between 1-2 ms*. As to my knowledge, RPi's library is going to handle this for us, as long as are params are correct.
+
+We have to control 2 directions, and to achieve this, our motor controller sets nuetral or no speed at ~15% duty cycle*. The equation for doing this is not perfectly 
+implemented as our robot currently is faster in reverse then foward, and can't max out of either end of the duty cycle spectrum. It works for now though. 
+
+*It should be noted that there is a float variable declared as offset to accomadate fine tuning of this. I found success incrementing/decrementing it by 0.1 as needed, however
+there shouldn't be a great need to do this. You might find that there is no perfect stopping or mid point, however under load the motors won't have enough torque/power 
+to move unless told to. 
 
 
+##################################################################################################################################################################
+Things that could need improvement:
+       Problem:
+              The motor controllers seem to constantly jitter or change directions when not under load.
+       Solution
+              - Only update pwm signals when new duty cycle is needed or polled
+              
+        P: Code is completely Functional and not object oriented
+        S: create functions that indepedently read pygame's joystick input, and output PWM accordingly. This could also be OOPed with python's classes 
+        
+        P: No API
+        S: Create standardized API. This will be needed soon for autonomy.
+        
+        P: lot's of typos
+        S: There is no help.
+      
