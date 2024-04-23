@@ -1,1 +1,17 @@
 
+This is a robotic arm project. It has a few different parts.
+
+###################
+Hardware Requiremts:
+* Raspberry pi 4, 8gb model
+* Robotic Arm 
+* Adafruit pi servo hat
+* Jumper Cables
+* USB Camera
+###################
+
+The robotic hand can be found at:
+https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.tindie.com%2Fproducts%2FeLabpeers%2Frobot-arm-set%2F&psig=AOvVaw0-f6_V4Tjs2tJXZVbr6OGC&ust=1713986441836000&source=images&cd=vfe&opi=89978449&ved=0CBQQjhxqFwoTCKCNtqKH2YUDFQAAAAAdAAAAABAE
+
+It uses a google's mediapipe library to track arm movements
+Then It uses adafruit-circuitpython-servokit in order to control the robotic hand
